@@ -1,0 +1,61 @@
+---
+layout: default
+nav: contact
+title: "Contact | Dennis Wong"
+description: "Book a call with Dennis Wong or send a message. Orange County, California."
+---
+
+<!-- =====================================================
+     CONTACT PAGE
+     The form sends to Formspree. To change where it goes,
+     replace the form ID in the action="..." line below.
+     ===================================================== -->
+
+<section class="section">
+  <div class="wrap contact-grid">
+    <div>
+      <!-- ===== EDIT: CONTACT INTRO ===== -->
+      <p class="eyebrow">Contact</p>
+      <h1>Let's talk about what's breaking.</h1>
+      <p class="lead">No pitch. Tell me the problem that's costing you the most and I'll tell you honestly whether I can help.</p>
+      <!-- ===== END CONTACT INTRO ===== -->
+
+      <!-- ===== EDIT: BOOKING BUTTON ===== -->
+      <a class="btn" href="https://bookings.cloud.microsoft/book/AcmeAgileConsultingLLC2@acmeagileconsulting.com/">Book a call</a>
+      <!-- ===== END BOOKING BUTTON ===== -->
+
+      <!-- ===== EDIT: CONTACT DETAILS ===== -->
+      <ul class="contact-list">
+        <li><span>Email</span><a href="mailto:contact@acmeagileconsulting.com">contact@acmeagileconsulting.com</a></li>
+        <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/dennis7788wong/">linkedin.com/in/dennis7788wong</a></li>
+        <li><span>Location</span>Orange County, California</li>
+      </ul>
+      <p class="open-to">Open to full-time CIO / VP IT roles and advisory engagements.</p>
+      <!-- ===== END CONTACT DETAILS ===== -->
+    </div>
+
+    <div class="form-box">
+      <h2 style="font-size:1.4rem">Or send a message</h2>
+      <!-- ===== EDIT: FORMSPREE FORM ID (replace YOUR_FORM_ID) ===== -->
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <!-- ===== END FORMSPREE FORM ID ===== -->
+        <input type="hidden" name="_subject" value="Website contact: acmeagileconsulting.com">
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <label for="f-name">Name</label>
+        <input id="f-name" type="text" name="name" autocomplete="name" required>
+
+        <label for="f-company">Company</label>
+        <input id="f-company" type="text" name="company" autocomplete="organization">
+
+        <label for="f-email">Email</label>
+        <input id="f-email" type="email" name="email" autocomplete="email" required>
+
+        <label for="f-message">What's going on?</label>
+        <textarea id="f-message" name="message" required></textarea>
+
+        <button class="btn" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,5 @@
+# Site settings. You rarely need to touch this file.
+title: Dennis Wong | Acme Agile Consulting
+url: "https://acmeagileconsulting.com"
+exclude:
+  - README.md

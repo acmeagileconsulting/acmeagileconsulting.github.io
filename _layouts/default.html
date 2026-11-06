@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+  SHARED LAYOUT: header, navigation and footer for every page.
+  Edit the nav links or footer text here once and every page updates.
+  Page text lives in each page's own file (index.html, results/index.html, etc.).
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }}</title>
+  <meta name="description" content="{{ page.description }}">
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:description" content="{{ page.description }}">
+  <meta property="og:image" content="https://acmeagileconsulting.com/assets/img/og-image.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-nav="{{ page.nav }}">
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Acme Agile Consulting home">
+      <img src="/assets/img/acme-logo.png" alt="Acme Agile Consulting" width="407" height="210">
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <!-- ===== EDIT: NAV LINKS ===== -->
+      <a class="nav-results" href="/results/">Results</a>
+      <a class="nav-howitworks" href="/howitworks/">How it works</a>
+      <a class="nav-about" href="/about/">About</a>
+      <a class="nav-contact" href="/contact/">Contact</a>
+      <!-- ===== END NAV LINKS ===== -->
+    </nav>
+  </div>
+</header>
+
+<main>
+{{ content }}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <!-- ===== EDIT: FOOTER ===== -->
+    <div>
+      <strong>Dennis Wong</strong> &middot; Acme Agile Consulting LLC<br>
+      Orange County, California
+    </div>
+    <div class="footer-links">
+      <a href="mailto:contact@acmeagileconsulting.com">contact@acmeagileconsulting.com</a>
+      <a href="https://www.linkedin.com/in/dennis7788wong/">LinkedIn</a>
+    </div>
+    <!-- ===== END FOOTER ===== -->
+  </div>
+</footer>
+
+</body>
+</html>
