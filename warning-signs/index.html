@@ -106,7 +106,8 @@
   form .btn { padding: 13px 22px; font-size: 1rem; }
   .hp { position: absolute; left: -9999px; }
   .quiet { margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--gray); font-size: .98rem; }
-  .quiet a { color: var(--navy); font-weight: 700; }
+  .book-line { margin: 0 0 12px; color: var(--navy); font-weight: 700; font-size: 1.05rem; }
+  .book-btn { border-color: var(--navy); }
   .retake { background: none; border: 0; font: inherit; color: var(--gray); text-decoration: underline; cursor: pointer; padding: 0; margin-top: 18px; }
   .foot { margin-top: auto; padding-top: 40px; font-size: .85rem; color: var(--gray); }
   .foot a { color: var(--gray); }
@@ -184,7 +185,8 @@
     <p class="copied" id="formMsg" aria-live="polite"></p>
 
     <div class="quiet">
-      Want a second opinion? <a id="bookLink" href="https://bookings.cloud.microsoft/book/AcmeAgileConsultingLLC2@acmeagileconsulting.com/" target="_blank" rel="noopener">Book a quick call with Dennis.</a>
+      <p class="book-line">Want a second opinion on your results?</p>
+      <a class="btn ghost book-btn" id="bookLink" href="https://bookings.cloud.microsoft/book/AcmeAgileConsultingLLC2@acmeagileconsulting.com/" target="_blank" rel="noopener">Book a quick call with Dennis</a>
       <br><button class="retake" id="retake" type="button">Retake the quiz</button>
     </div>
   </section>
@@ -269,7 +271,7 @@ var PROBLEMS = {
   TWO: { name: "Two of them", take: "That's why every one-fix answer keeps failing." },
   ALL: { name: "All three", take: "It's not one fire. It's the building." }
 };
-var KICKER = "#8 is the warning sign nobody tells the CEO. Now you know why nobody told you about the other ones.";
+var KICKER = "And leadership can't see it. That's why it's still broken.";
 var SITE_URL = "https://acmeagileconsulting.com/warning-signs/";
 /* ===== END EDIT ===== */
 
