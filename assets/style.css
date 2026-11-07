@@ -109,6 +109,8 @@ p { margin: 0 0 1em; }
 .cta-band { background: var(--navy); color: var(--white); text-align: center; padding: 72px 0; }
 .cta-band h2 { color: var(--white); }
 .cta-band p { color: #C9D1DE; max-width: 620px; margin: 0 auto 1.6em; }
+.cta-band .quiz-link { margin: 1.6em auto 0; font-size: .98rem; }
+.cta-band .quiz-link a { color: #fff; font-weight: 700; }
 
 /* ---------- Page header ---------- */
 .page-head { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
