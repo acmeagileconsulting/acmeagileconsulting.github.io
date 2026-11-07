@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<!--
+  QUIZ: 8 IT Warning Signs Nobody Tells the CEO
+  Standalone page (no site nav on purpose).
+
+  TO EDIT TEXT:
+  - Intro screen text: look for "EDIT: INTRO" below.
+  - Questions, answers and reactions: look for "EDIT: QUESTIONS" in the script.
+  - Verdicts and hot takes: look for "EDIT: RESULTS TEXT" in the script.
+  Change only the words inside the quotes. Keep the quotes and commas.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8 IT Warning Signs Nobody Tells the CEO</title>
+<meta name="description" content="How many do you have? A 60-second quiz: is your IT problem the system, the team, or the budget?">
+<meta property="og:title" content="8 IT Warning Signs Nobody Tells the CEO">
+<meta property="og:description" content="How many do you have? 60 seconds. System, Team, or Budget.">
+<meta property="og:image" content="https://acmeagileconsulting.com/assets/img/og-image.png">
+<meta property="og:url" content="https://acmeagileconsulting.com/warning-signs/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T4C5QZPPFR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T4C5QZPPFR');
+</script>
+<style>
+  :root {
+    --navy: #1B2A4A; --charcoal: #2E3440; --gray: #5B6472; --line: #E3E6EB;
+    --soft: #F5F6F8; --coral: #C93E56; --coral-dark: #A92F45; --coral-soft: #FBEBEE;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; font-family: var(--font); color: var(--charcoal); background: var(--white, #fff); line-height: 1.5; }
+  .shell { max-width: 640px; margin: 0 auto; padding: 20px 20px 48px; min-height: 100vh; display: flex; flex-direction: column; }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 28px; min-height: 40px; }
+  .brand img { height: 36px; width: auto; display: block; }
+  .counter { font-size: .9rem; font-weight: 700; color: var(--gray); white-space: nowrap; }
+  .counter b { display: inline-block; min-width: 1.4em; text-align: center; color: var(--white, #fff); background: var(--coral); border-radius: 999px; padding: 1px 8px; margin-left: 4px; transition: transform .25s; }
+  .counter b.bump { transform: scale(1.35); }
+  .dots { display: flex; gap: 6px; margin-bottom: 18px; }
+  .dots span { flex: 1; height: 6px; border-radius: 3px; background: var(--line); transition: background .3s; }
+  .dots span.done { background: var(--navy); }
+  .dots span.now { background: var(--coral); }
+  .screen { display: none; animation: fade .35s ease; }
+  .screen.on { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  h1 { color: var(--navy); font-size: clamp(2rem, 7vw, 2.8rem); line-height: 1.1; margin: 0 0 14px; font-weight: 800; letter-spacing: -0.02em; }
+  h2 { color: var(--navy); font-size: clamp(1.45rem, 5vw, 1.8rem); line-height: 1.2; margin: 0 0 22px; font-weight: 800; }
+  .sub { font-size: 1.2rem; color: var(--gray); margin: 0 0 8px; }
+  .sub strong { color: var(--coral); }
+  .meta { font-size: .95rem; color: var(--gray); margin: 0 0 30px; }
+  .tease { font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; color: var(--coral); margin: 0 0 10px; min-height: 1.2em; }
+  .btn { display: inline-block; background: var(--coral); color: #fff; font: inherit; font-weight: 700; font-size: 1.1rem; border: 0; border-radius: 8px; padding: 16px 32px; cursor: pointer; text-decoration: none; }
+  .btn:hover { background: var(--coral-dark); color: #fff; }
+  .btn.navy { background: var(--navy); }
+  .btn.navy:hover { background: #111c33; }
+  .btn.ghost { background: #fff; color: var(--navy); border: 2px solid var(--line); }
+  .btn.ghost:hover { border-color: var(--navy); color: var(--navy); }
+  .answers { display: grid; gap: 12px; }
+  .answers.yn { grid-template-columns: 1fr 1fr; }
+  .opt { text-align: left; font: inherit; font-size: 1.08rem; font-weight: 600; color: var(--charcoal); background: #fff; border: 2px solid var(--line); border-radius: 10px; padding: 16px 18px; cursor: pointer; transition: border-color .15s, background .15s; }
+  .answers.yn .opt { text-align: center; font-size: 1.2rem; }
+  .opt:hover:not(:disabled) { border-color: var(--navy); }
+  .opt:disabled { cursor: default; opacity: .45; }
+  .opt.picked { opacity: 1; border-color: var(--navy); background: var(--soft); }
+  .opt.picked.warn { border-color: var(--coral); background: var(--coral-soft); }
+  .react { margin-top: 20px; min-height: 2em; }
+  .react p { margin: 0 0 16px; font-size: 1.12rem; font-weight: 600; color: var(--navy); }
+  .react p.warn::before { content: "\26A0\FE0F  "; }
+  .center { text-align: center; }
+  .analyzing { padding-top: 60px; }
+  .spinner { width: 46px; height: 46px; border: 4px solid var(--line); border-top-color: var(--coral); border-radius: 50%; margin: 0 auto 22px; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .score { font-size: clamp(3.4rem, 14vw, 5rem); font-weight: 900; color: var(--coral); line-height: 1; margin: 0 0 4px; }
+  .score small { font-size: .35em; color: var(--gray); font-weight: 700; }
+  .verdict { font-size: clamp(1.5rem, 5.5vw, 2rem); color: var(--navy); font-weight: 800; line-height: 1.2; margin: 10px 0 8px; }
+  .verdict-note { color: var(--gray); font-size: 1.05rem; margin: 0 0 26px; }
+  .box { border-radius: 12px; padding: 22px; margin: 0 0 18px; }
+  .box.problem { background: var(--navy); color: #fff; }
+  .box.problem .label { font-size: .78rem; text-transform: uppercase; letter-spacing: .14em; color: #C9D1DE; font-weight: 700; margin: 0 0 6px; }
+  .box.problem .name { font-size: 1.6rem; font-weight: 800; margin: 0 0 6px; }
+  .box.problem p { margin: 0; color: #E6EAF1; font-size: 1.05rem; }
+  .box.kicker { background: var(--coral-soft); border-left: 4px solid var(--coral); color: var(--navy); font-weight: 700; font-size: 1.05rem; }
+  .signs { list-style: none; margin: 0 0 30px; padding: 0; }
+  .signs li { padding: 14px 0; border-top: 1px solid var(--line); }
+  .signs li strong { display: block; color: var(--navy); }
+  .signs li span { color: var(--gray); font-size: .98rem; }
+  .section-h { font-size: .8rem; text-transform: uppercase; letter-spacing: .14em; color: var(--gray); font-weight: 800; margin: 30px 0 10px; }
+  .share { background: var(--soft); border-radius: 12px; padding: 22px; margin: 6px 0 26px; text-align: center; }
+  .share .btn { width: 100%; }
+  .share-row { display: flex; gap: 10px; margin-top: 10px; }
+  .share-row .btn { flex: 1; padding: 12px 10px; font-size: .98rem; }
+  .copied { font-size: .9rem; color: var(--gray); min-height: 1.3em; margin: 8px 0 0; }
+  .deeper a { color: var(--navy); font-weight: 700; }
+  form { display: flex; gap: 10px; flex-wrap: wrap; }
+  form input[type=email] { flex: 1 1 220px; font: inherit; padding: 13px 14px; border: 1px solid #C8CDD5; border-radius: 8px; }
+  form input[type=email]:focus { outline: 2px solid var(--navy); outline-offset: 1px; }
+  form .btn { padding: 13px 22px; font-size: 1rem; }
+  .hp { position: absolute; left: -9999px; }
+  .quiet { margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--gray); font-size: .98rem; }
+  .quiet a { color: var(--navy); font-weight: 700; }
+  .retake { background: none; border: 0; font: inherit; color: var(--gray); text-decoration: underline; cursor: pointer; padding: 0; margin-top: 18px; }
+  .foot { margin-top: auto; padding-top: 40px; font-size: .85rem; color: var(--gray); }
+  .foot a { color: var(--gray); }
+  @media (max-width: 420px) { .share-row { flex-direction: column; } }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="top">
+    <a class="brand" href="/" aria-label="Acme Agile Consulting"><img src="/assets/img/acme-logo.png" alt="Acme Agile Consulting" width="407" height="210"></a>
+    <div class="counter" id="counter" hidden>Warning signs <b id="count">0</b></div>
+  </div>
+
+  <!-- ===== EDIT: INTRO ===== -->
+  <section class="screen on" id="intro">
+    <h1>8 IT Warning Signs Nobody Tells the CEO</h1>
+    <p class="sub">How many do you have? <strong>System, Team, or Budget.</strong></p>
+    <p class="meta">8 questions. 60 seconds. Brutally honest results.</p>
+    <button class="btn" id="startBtn" type="button">Start the quiz</button>
+  </section>
+  <!-- ===== END INTRO ===== -->
+
+  <section class="screen" id="quiz">
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <p class="tease" id="tease"></p>
+    <h2 id="qText"></h2>
+    <div class="answers" id="answers"></div>
+    <div class="react" id="react" aria-live="polite"></div>
+  </section>
+
+  <section class="screen analyzing center" id="analyzing">
+    <div class="spinner"></div>
+    <h2 id="analyzeText">Analyzing your answers...</h2>
+  </section>
+
+  <section class="screen" id="results">
+    <p class="score" id="score"></p>
+    <p class="verdict" id="verdict"></p>
+    <p class="verdict-note" id="verdictNote"></p>
+
+    <div class="box problem" id="problemBox">
+      <p class="label">Your problem</p>
+      <p class="name" id="problemName"></p>
+      <p id="problemTake"></p>
+    </div>
+
+    <div class="box kicker" id="kicker" hidden></div>
+
+    <div class="share">
+      <a class="btn" id="sendBtn" href="#">Send this to someone who needs it</a>
+      <div class="share-row">
+        <a class="btn ghost" id="liBtn" href="#" target="_blank" rel="noopener">Share on LinkedIn</a>
+        <button class="btn ghost" id="copyBtn" type="button">Copy link</button>
+      </div>
+      <p class="copied" id="copied" aria-live="polite"></p>
+    </div>
+
+    <p class="section-h" id="signsHead">Your warning signs</p>
+    <ul class="signs" id="signs"></ul>
+
+    <p class="section-h">Go deeper</p>
+    <p class="deeper"><a id="articleLink" href="https://www.linkedin.com/pulse/system-team-budget-how-diagnose-problems-dennis-wong-gokuc/" target="_blank" rel="noopener">Is it the system, the team, or the budget? How to tell which one you actually have.</a></p>
+
+    <p class="section-h">Want the fix for each of your warning signs?</p>
+    <form id="emailForm" action="https://formspree.io/f/mnpprrdk" method="POST">
+      <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="_subject" id="fSubject" value="Warning signs quiz">
+      <input type="hidden" name="score" id="fScore">
+      <input type="hidden" name="problem" id="fProblem">
+      <input type="hidden" name="answers" id="fAnswers">
+      <input type="email" name="email" placeholder="Your work email" required aria-label="Your work email">
+      <button class="btn navy" type="submit">Send it to me</button>
+    </form>
+    <p class="copied" id="formMsg" aria-live="polite"></p>
+
+    <div class="quiet">
+      Want a second opinion? <a id="bookLink" href="https://bookings.cloud.microsoft/book/AcmeAgileConsultingLLC2@acmeagileconsulting.com/" target="_blank" rel="noopener">Book a quick call with Dennis.</a>
+      <br><button class="retake" id="retake" type="button">Retake the quiz</button>
+    </div>
+  </section>
+
+  <div class="foot">
+    Made by <a href="/about/">Dennis Wong</a>, former Best Buy divisional CIO. <a href="/">acmeagileconsulting.com</a>
+  </div>
+</div>
+
+<script>
+/* ===== EDIT: QUESTIONS =====
+   type: "yn" = Yes/No buttons, "mc" = multiple choice
+   cat: S = System, T = Team, B = Budget, X = the leadership kicker (#8)
+   warn: true marks an answer that counts as a warning sign
+*/
+var QUESTIONS = [
+  { tease: "Easy one first.", type: "yn", cat: "S",
+    q: "Does something important crash at the worst possible time?",
+    a: [ { t: "Yes", warn: true }, { t: "No" } ],
+    react: "Systems don't get tired. That's a pattern, not bad luck.",
+    ok: "Nice. Peak season doesn't scare you." },
+  { tease: "", type: "yn", cat: "T",
+    q: "Is there one person everyone runs to when something breaks?",
+    a: [ { t: "Yes", warn: true }, { t: "No" } ],
+    react: "That's your real org chart. Now picture them on vacation.",
+    ok: "Good. No single point of failure with a name." },
+  { tease: "", type: "yn", cat: "S",
+    q: "Do you have a \"temporary\" workaround that's been around for years?",
+    a: [ { t: "Yes", warn: true }, { t: "No" } ],
+    react: "Temporary is the most permanent word in IT.",
+    ok: "Rare. Most companies have at least one." },
+  { tease: "Halfway. Now it gets honest.", type: "mc", cat: "T",
+    q: "Where does your IT team's time actually go?",
+    a: [ { t: "We track it, down to the hour" },
+         { t: "Wherever the loudest person points", warn: true },
+         { t: "Into a black hole, presumably", warn: true },
+         { t: "Ask Dave. Dave knows.", warn: true } ],
+    react: "If you can't see the hours, you can't fix the work.",
+    ok: "Tracked hours. You're ahead of most." },
+  { tease: "", type: "mc", cat: "B",
+    q: "How does IT ask for money?",
+    a: [ { t: "A business case with real ROI" },
+         { t: "A list of everything that's broken", warn: true },
+         { t: "A long, sad email", warn: true },
+         { t: "They stopped asking", warn: true } ],
+    react: "Task lists lose to numbers. Every single time.",
+    ok: "Numbers win budgets. Good." },
+  { tease: "", type: "mc", cat: "S",
+    q: "Someone wants to change the core system. What happens?",
+    a: [ { t: "We test it and ship it. No drama." },
+         { t: "Everyone gets very quiet", warn: true },
+         { t: "\"The guy who built that left in 2014\"", warn: true },
+         { t: "We push it Friday at 5 and cross our fingers", warn: true } ],
+    react: "If nobody can change it safely, it owns you.",
+    ok: "Boring releases are the best releases." },
+  { tease: "Last two. These sting.", type: "yn", cat: "B",
+    q: "Could anyone tell you your total tech spend by Friday?",
+    a: [ { t: "Yes" }, { t: "No", warn: true } ],
+    react: "Somewhere there's a $225-an-hour help desk nobody approved.",
+    ok: "Someone's adding up the invoices. Keep it that way." },
+  { tease: "Last one. The one nobody tells the CEO.", type: "mc", cat: "X",
+    q: "What does leadership think is broken in IT?",
+    a: [ { t: "We've talked. They know." },
+         { t: "Nothing. It's fine.", warn: true },
+         { t: "They only think about IT when the Wi-Fi's down", warn: true },
+         { t: "Everything. They just stopped saying it.", warn: true } ],
+    react: "That's the one. When nobody upstairs suspects anything, problems stay invisible until they're expensive.",
+    ok: "Leadership and IT talking. That's rarer than it should be." }
+];
+
+/* ===== EDIT: RESULTS TEXT ===== */
+var VERDICTS = [
+  { max: 1, title: "You're the exception. Or nobody tells you either.", note: "Ask someone two levels down. See if they agree." },
+  { max: 3, title: "Quiet trouble.", note: "Nothing's on fire yet. This is when fixing it is cheap." },
+  { max: 5, title: "One bad week from disaster.", note: "You're running on luck and a few good people." },
+  { max: 8, title: "It's already happening. Nobody's told you.", note: "The good news: it's fixable. The bad news: it won't fix itself." }
+];
+var PROBLEMS = {
+  S:   { name: "The System", take: "Your system runs your business. Not the other way around." },
+  T:   { name: "The Team", take: "Your people aren't the problem. Invisible work is." },
+  B:   { name: "The Budget", take: "You don't have a budget problem. You have a spending problem nobody added up." },
+  TWO: { name: "Two of them", take: "That's why every one-fix answer keeps failing." },
+  ALL: { name: "All three", take: "It's not one fire. It's the building." }
+};
+var KICKER = "#8 is the warning sign nobody tells the CEO. Now you know why nobody told you about the other ones.";
+var SITE_URL = "https://acmeagileconsulting.com/warning-signs/";
+/* ===== END EDIT ===== */
+
+var $ = function (id) { return document.getElementById(id); };
+var idx = 0, picks = [], warns = 0;
+
+function track(name, params) { try { gtag('event', name, params || {}); } catch (e) {} }
+
+function show(id) {
+  ['intro', 'quiz', 'analyzing', 'results'].forEach(function (s) { $(s).classList.toggle('on', s === id); });
+  window.scrollTo(0, 0);
+}
+
+function renderDots() {
+  var d = $('dots'); d.innerHTML = '';
+  QUESTIONS.forEach(function (_, i) {
+    var s = document.createElement('span');
+    if (i < idx) s.className = 'done'; else if (i === idx) s.className = 'now';
+    d.appendChild(s);
+  });
+}
+
+function bump() {
+  var b = $('count'); b.textContent = warns; b.classList.add('bump');
+  setTimeout(function () { b.classList.remove('bump'); }, 250);
+}
+
+function renderQ() {
+  var q = QUESTIONS[idx];
+  renderDots();
+  $('tease').textContent = q.tease || ('Question ' + (idx + 1) + ' of ' + QUESTIONS.length);
+  $('qText').textContent = q.q;
+  $('react').innerHTML = '';
+  var box = $('answers'); box.innerHTML = '';
+  box.className = 'answers' + (q.type === 'yn' ? ' yn' : '');
+  q.a.forEach(function (ans, ai) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'opt'; b.textContent = ans.t;
+    b.addEventListener('click', function () { choose(ai, b); });
+    box.appendChild(b);
+  });
+}
+
+function choose(ai, btn) {
+  var q = QUESTIONS[idx], ans = q.a[ai];
+  Array.prototype.forEach.call($('answers').children, function (b) { b.disabled = true; });
+  btn.classList.add('picked'); if (ans.warn) btn.classList.add('warn');
+  picks[idx] = { q: idx, a: ai, warn: !!ans.warn };
+  if (ans.warn) { warns++; bump(); }
+  var r = $('react');
+  var p = document.createElement('p');
+  p.textContent = ans.warn ? q.react : q.ok;
+  if (ans.warn) p.className = 'warn';
+  r.appendChild(p);
+  var next = document.createElement('button');
+  next.type = 'button'; next.className = 'btn navy';
+  next.textContent = idx < QUESTIONS.length - 1 ? 'Next' : 'See my results';
+  next.addEventListener('click', advance);
+  r.appendChild(next);
+  next.focus({ preventScroll: true });
+}
+
+function advance() {
+  idx++;
+  if (idx < QUESTIONS.length) { renderQ(); window.scrollTo(0, 0); return; }
+  $('counter').hidden = true;
+  show('analyzing');
+  var lines = ['Analyzing your answers...', 'Checking the system...', 'Checking the team...', 'Following the money...'];
+  var li = 0;
+  var t = setInterval(function () { li++; if (li < lines.length) $('analyzeText').textContent = lines[li]; }, 550);
+  setTimeout(function () { clearInterval(t); results(); }, 2300);
+}
+
+function hits(cat) { return picks.filter(function (p) { return p.warn && QUESTIONS[p.q].cat === cat; }).length; }
+
+function results() {
+  var s = hits('S'), tm = hits('T'), b = hits('B'), x = hits('X') > 0;
+  var flagged = [];
+  if (s >= 2) flagged.push('S');
+  if (tm >= 1) flagged.push('T');
+  if (b >= 1) flagged.push('B');
+  if (!flagged.length && s >= 1) flagged.push('S');
+
+  var key = null;
+  if (flagged.length === 1) key = flagged[0];
+  else if (flagged.length === 2) key = 'TWO';
+  else if (flagged.length === 3) key = 'ALL';
+
+  var v = VERDICTS.filter(function (v) { return warns <= v.max; })[0];
+  $('score').innerHTML = warns + ' <small>of 8</small>';
+  $('verdict').textContent = v.title;
+  $('verdictNote').textContent = v.note;
+
+  var names = { S: 'System', T: 'Team', B: 'Budget' };
+  if (key && warns >= 2) {
+    $('problemBox').hidden = false;
+    var pn = PROBLEMS[key].name;
+    if (key === 'TWO') pn = 'Two of them: ' + flagged.map(function (f) { return names[f]; }).join(' + ');
+    $('problemName').textContent = pn;
+    $('problemTake').textContent = PROBLEMS[key].take;
+  } else {
+    $('problemBox').hidden = true;
+  }
+
+  $('kicker').hidden = !x;
+  $('kicker').textContent = KICKER;
+
+  var list = $('signs'); list.innerHTML = '';
+  picks.filter(function (p) { return p.warn; }).forEach(function (p) {
+    var q = QUESTIONS[p.q];
+    var li = document.createElement('li');
+    var st = document.createElement('strong'); st.textContent = q.q;
+    var sp = document.createElement('span'); sp.textContent = q.react;
+    li.appendChild(st); li.appendChild(sp); list.appendChild(li);
+  });
+  $('signsHead').hidden = warns === 0;
+
+  var problemLabel = key ? (key === 'TWO' || key === 'ALL' ? PROBLEMS[key].name : names[key]) : 'none';
+  var shareLine = 'We hit ' + warns + ' of 8 IT warning signs. How many does your company have?';
+  $('sendBtn').href = 'mailto:?subject=' + encodeURIComponent('8 IT warning signs nobody tells the CEO') +
+    '&body=' + encodeURIComponent('Took this 60-second quiz. We hit ' + warns + ' of 8. Curious what you get:\n\n' + SITE_URL);
+  $('liBtn').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(SITE_URL);
+  $('copyBtn').onclick = function () {
+    var text = shareLine + ' ' + SITE_URL;
+    var done = function () { $('copied').textContent = 'Copied. Paste it anywhere.'; };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, function () { $('copied').textContent = text; });
+    else $('copied').textContent = text;
+    track('quiz_share', { method: 'copy', score: warns });
+  };
+  $('sendBtn').onclick = function () { track('quiz_share', { method: 'email', score: warns }); };
+  $('liBtn').onclick = function () { track('quiz_share', { method: 'linkedin', score: warns }); };
+  $('bookLink').onclick = function () { track('quiz_book_click', { score: warns }); };
+  $('articleLink').onclick = function () { track('quiz_article_click', { score: warns }); };
+
+  $('fSubject').value = 'Warning signs quiz: ' + warns + ' of 8 (' + problemLabel + ')';
+  $('fScore').value = warns + ' of 8';
+  $('fProblem').value = problemLabel;
+  $('fAnswers').value = picks.map(function (p) {
+    return (p.q + 1) + '. ' + QUESTIONS[p.q].q + ' -> ' + QUESTIONS[p.q].a[p.a].t + (p.warn ? ' [SIGN]' : '');
+  }).join('\n');
+
+  track('quiz_complete', { score: warns, problem: problemLabel });
+  show('results');
+}
+
+$('emailForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var f = e.target, msg = $('formMsg');
+  msg.textContent = 'Sending...';
+  fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } })
+    .then(function (r) {
+      if (r.ok) { msg.textContent = "Got it. Dennis will send your fixes personally."; f.reset(); track('quiz_email_submit', { score: warns }); }
+      else { msg.textContent = 'Something went wrong. Email dennis@acmeagileconsulting.com instead.'; }
+    })
+    .catch(function () { msg.textContent = 'Something went wrong. Email dennis@acmeagileconsulting.com instead.'; });
+});
+
+function start() {
+  idx = 0; picks = []; warns = 0;
+  $('count').textContent = '0';
+  $('counter').hidden = false;
+  $('formMsg').textContent = ''; $('copied').textContent = '';
+  renderQ(); show('quiz');
+  track('quiz_start');
+}
+$('startBtn').addEventListener('click', start);
+$('retake').addEventListener('click', start);
+</script>
+</body>
+</html>
