@@ -5,10 +5,43 @@ title: "Page not found | Dennis Wong"
 description: "Page not found."
 permalink: /404.html
 ---
+<script>
+/* Catch-all redirects for old or mistyped addresses. Keeps ?utm_ tags.
+   Add a rule: [pattern, "/new-page/"]. First match wins. */
+(function () {
+  var rules = [
+    [/^\/howiwork$|how-?it-?works?$/, "/howitworks/"],
+    [/war.*sign|warning|quiz|health-?check|it-?test/, "/warning-signs/"],
+    [/^\/a\d/, "/howitworks/"],
+    [/^\/c\d/, "/results/"],
+    [/reality-?check/, "/howitworks/"],
+    [/result|case-?stor/, "/results/"],
+    [/about/, "/about/"],
+    [/contact|talk|book/, "/contact/"],
+    [/resource|library|article/, "/"]
+  ];
+  var p;
+  try { p = decodeURIComponent(location.pathname); } catch (e) { p = location.pathname; }
+  p = p.toLowerCase().replace(/\/+$/, "");
+  for (var i = 0; i < rules.length; i++) {
+    if (rules[i][0].test(p)) {
+      var to = rules[i][1];
+      if (to.replace(/\/$/, "") !== p) { location.replace(to + location.search + location.hash); return; }
+    }
+  }
+})();
+</script>
+
 <section class="section">
   <div class="wrap center">
+    <!-- ===== EDIT: 404 PAGE ===== -->
     <h1>That page isn't here.</h1>
-    <p class="lead">It may have moved when the site was rebuilt.</p>
-    <p><a class="btn" href="/">Go to the home page</a></p>
+    <p class="lead">It probably moved when the site was rebuilt. Try one of these:</p>
+    <p class="notfound-links">
+      <a class="btn" href="/">Home</a>
+      <a class="btn ghost-btn" href="/warning-signs/">Take the 8 Warning Signs test</a>
+      <a class="btn ghost-btn" href="/contact/">Contact</a>
+    </p>
+    <!-- ===== END 404 PAGE ===== -->
   </div>
 </section>

@@ -172,6 +172,11 @@ form .btn { margin-top: 22px; }
 .form-box { background: var(--soft); border-radius: 10px; padding: 32px; }
 .hp { position: absolute; left: -9999px; }
 
+/* ---------- 404 ---------- */
+.notfound-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+.ghost-btn { background: #fff; color: var(--navy); border: 2px solid var(--line); }
+.ghost-btn:hover { background: #fff; color: var(--navy); border-color: var(--navy); }
+
 /* ---------- Footer ---------- */
 .site-footer { border-top: 1px solid var(--line); padding: 32px 0; font-size: .92rem; color: var(--gray); }
 .footer-inner { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
